@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "hdoc.hotbar_keys.ExampleMod"
+            "hdoc.hotbar_keys.HotbarKeys"
         ]
     },
     "mixins": [
