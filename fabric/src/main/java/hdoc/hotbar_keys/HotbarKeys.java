@@ -13,12 +13,11 @@ public class HotbarKeys implements ModInitializer {
         // can access Fabric and Common code in this project.
 
         // Use Fabric to bootstrap the Common mod.
-        Constants.LOG.info("Hello Fabric world!");
-        CommonClass.init();
-
         KeyBindingHelper.registerKeyBinding(CommonClass.usePrevItem);
         KeyBindingHelper.registerKeyBinding(CommonClass.useNextItem);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> CommonClass.onClientTick(client));
+
+        CommonClass.init();
     }
 }

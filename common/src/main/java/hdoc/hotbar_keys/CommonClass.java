@@ -7,8 +7,6 @@ import hdoc.hotbar_keys.platform.Services;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Items;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -62,12 +60,6 @@ public class CommonClass {
     // projects. This example has some code that gets invoked by the entry point of the loader
     // specific projects.
     public static void init() {
-        Constants.LOG.info(
-                "Hello from Common init on {}! we are currently in a {} environment!",
-                Services.PLATFORM.getPlatformName(),
-                Services.PLATFORM.getEnvironmentName());
-        Constants.LOG.info(
-                "The ID for diamonds is {}", BuiltInRegistries.ITEM.getKey(Items.DIAMOND));
 
         // It is common for all supported loaders to provide a similar feature that can not be used
         // directly in the common code. A popular way to get around this is using Java's built-in
