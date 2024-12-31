@@ -68,7 +68,7 @@ public class CommonClass {
         // code and use a loader specific implementation to delegate our call to the platform
         // specific approach.
         if (Services.PLATFORM.isModLoaded(Constants.MOD_ID)) {
-            Constants.LOG.info("{} successfully loaded", Constants.MOD_NAME);
+            Constants.LOG.info("Successfully loaded!");
         }
     }
 }
