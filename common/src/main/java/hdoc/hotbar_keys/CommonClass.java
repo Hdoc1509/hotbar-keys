@@ -75,8 +75,8 @@ public class CommonClass {
         // this in our provided services class. In this example we have an interface in the common
         // code and use a loader specific implementation to delegate our call to the platform
         // specific approach.
-        if (Services.PLATFORM.isModLoaded("examplemod")) {
-            Constants.LOG.info("Hello to examplemod");
+        if (Services.PLATFORM.isModLoaded(Constants.MOD_ID)) {
+            Constants.LOG.info("{} successfully loaded", Constants.MOD_NAME);
         }
     }
 }
