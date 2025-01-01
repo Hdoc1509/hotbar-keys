@@ -6,3 +6,7 @@ Navigate the hotbar with your keyboard
 
 - `R`: select the next hotbar slot.
 - `V`: select the previous hotbar slot.
+
+## Compatibility
+
+- `Fabric`: `1.21.X`
