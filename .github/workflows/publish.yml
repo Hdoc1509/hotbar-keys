@@ -7,7 +7,7 @@ on:
 env:
   JAVA_MAJOR_VERSION: 21
   JAVA_JDK_VERSION: "21.0.5"
-  MC_VERSION: "1.21"
+  MC_BASE_VERSION: "1.21"
   MC_COMPATIBLE_VERSION: "[1.21,1.22)"
 
 jobs:
@@ -54,9 +54,9 @@ jobs:
           github-tag: ${{ github.ref_name }}
 
           files: |
-            fabric/build/libs/hotbar-keys-fabric-${{ env.MC_VERSION }}-${{ env.MOD_VERSION }}.jar
+            fabric/build/libs/hotbar-keys-fabric-${{ env.MC_BASE_VERSION }}-${{ env.MOD_VERSION }}.jar
 
-          name: Hotbar Keys (Fabric) ${{ env.MOD_VERSION }} for Minecraft ${{ env.MC_VERSION }}.X
+          name: Hotbar Keys (Fabric) ${{ env.MOD_VERSION }} for Minecraft ${{ env.MC_BASE_VERSION }}.X
           version-type: release
           changelog: |
             Please refer to [CHANGELOG.md](https://github.com/Hdoc1509/hotbar-keys/blob/${{ github.ref_name }}/fabric/CHANGELOG.md) for details.
