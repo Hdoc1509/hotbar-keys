@@ -23,3 +23,9 @@ build
 eclipse
 run
 runs
+
+# node
+node_modules
+
+# env
+.env

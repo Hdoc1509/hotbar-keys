@@ -1,0 +1,15 @@
+{
+  "name": "@hdoc/hotbar-keys",
+  "version": "0.0.0",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "author": "Héctor Ochoa <hector.ochoa.dev@gmail.com>",
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "mod:release": "bash ./scripts/release-major-0.sh"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.27.11",
+    "@svitejs/changesets-changelog-github-compact": "1.2.0"
+  }
+}
