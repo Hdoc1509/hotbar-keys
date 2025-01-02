@@ -1,0 +1,66 @@
+name: Publish
+
+on:
+  push:
+    tags: ["*"]
+
+env:
+  JAVA_MAJOR_VERSION: 21
+  JAVA_JDK_VERSION: "21.0.5"
+  MC_VERSION: "1.21"
+  MC_COMPATIBLE_VERSION: "[1.21,1.22)"
+
+jobs:
+  build:
+    if: github.repository == 'Hdoc1509/hotbar-keys'
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup Java
+        uses: actions/setup-java@v4.6.0
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_JDK_VERSION }}
+
+      - name: Allow Gradlew Wrapper to be executed
+        run: chmod +x ./gradlew
+
+      # NOTE:
+      # tags have the format: {loader}-{mc-version}@{mod-version}
+      #   i.e. fabric-1.21.X@0.1.0, neoforge-1.19.X@0.1.0
+      - name: Setup Shareable Environment Variables
+        run: |
+          mod_version="$(cut --delimiter=@ --fields=2 <<< ${{ github.ref_name }})"
+          echo "MOD_VERSION=${mod_version}" >> "$GITHUB_ENV"
+
+      - name: Build Fabric
+        if: startsWith(github.event.ref, 'refs/tags/fabric-')
+        run: ./gradlew fabric:build
+
+      - name: Publish Fabric
+        if: ${{ startsWith(github.event.ref, 'refs/tags/fabric-') && success() }}
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 1169947
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          modrinth-id: Lsq3tiTo
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          github-tag: ${{ github.ref_name }}
+
+          files: |
+            fabric/build/libs/hotbar-keys-fabric-${{ env.MC_VERSION }}-${{ env.MOD_VERSION }}.jar
+
+          name: Hotbar Keys (Fabric) ${{ env.MOD_VERSION }} for Minecraft ${{ env.MC_VERSION }}.X
+          version-type: release
+          changelog: |
+            Please refer to [CHANGELOG.md](https://github.com/Hdoc1509/hotbar-keys/blob/${{ github.ref_name }}/fabric/CHANGELOG.md) for details.
+          changelog-file: fabric/CHANGELOG.md
+          loaders: fabric
+          game-versions: ${{ env.MC_COMPATIBLE_VERSION }}
+          java: ${{ env.JAVA_MAJOR_VERSION }}
