@@ -31,7 +31,7 @@ jobs:
 
       # NOTE:
       # tags have the format: {loader}-{mc-version}@{mod-version}
-      #   i.e. fabric-1.21.X@0.1.0, neoforge-1.19.X@0.1.0
+      #   i.e. fabric-1.21.x@0.1.0, neoforge-1.19.x@0.1.0
       - name: Setup Shareable Environment Variables
         run: |
           mod_version="$(cut --delimiter=@ --fields=2 <<< ${{ github.ref_name }})"
@@ -56,7 +56,7 @@ jobs:
           files: |
             fabric/build/libs/hotbar-keys-fabric-${{ env.MC_BASE_VERSION }}-${{ env.MOD_VERSION }}.jar
 
-          name: Hotbar Keys (Fabric) ${{ env.MOD_VERSION }} for Minecraft ${{ env.MC_BASE_VERSION }}.X
+          name: Hotbar Keys (Fabric) ${{ env.MOD_VERSION }} for Minecraft ${{ env.MC_BASE_VERSION }}.x
           version-type: release
           changelog: |
             Please refer to [CHANGELOG.md](https://github.com/Hdoc1509/hotbar-keys/blob/${{ github.ref_name }}/fabric/CHANGELOG.md) for details.
