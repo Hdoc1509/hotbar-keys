@@ -7,7 +7,7 @@
   "commit": false,
   "fixed": [],
   "linked": [],
-  "baseBranch": "master",
+  "baseBranch": "1.21",
   "updateInternalDependencies": "patch",
   "ignore": [],
   "privatePackages": {
