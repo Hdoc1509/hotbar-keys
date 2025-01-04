@@ -29,6 +29,9 @@ for loader in "${loaders[@]}"; do
       grep --count --extended-regexp "$BREAKING_CHANGE_MESSAGE_REGEX"
   )
 
+  # NOTE: uncomment to test
+  # _breaking_changes_count=1
+
   if [[ $_breaking_changes_count -eq 0 ]]; then
     continue
   fi
