@@ -12,6 +12,10 @@ source "$REPO_ROOT"/scripts/utils.sh
 
 get_loader_last_tag() { git describe --tags --abbrev=0 --match "${1}-*"; }
 
+if [[ ! -d "$REPO_ROOT"/tmp ]]; then
+  mkdir "$REPO_ROOT"/tmp
+fi
+
 echo "{}" >"$TMP_RELEASE_FILE"
 
 for loader in "${loaders[@]}"; do
