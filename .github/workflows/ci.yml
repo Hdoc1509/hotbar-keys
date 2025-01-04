@@ -11,10 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  JAVA_MAJOR_VERSION: 21
   JAVA_JDK_VERSION: "21.0.5"
-  MC_BASE_VERSION: "1.21"
-  MC_COMPATIBLE_VERSION: "[1.21,1.22)"
 
 jobs:
   # based on https://github.com/vitejs/vite/blob/83355a6529092b3a576e2c24bbd8f9097f7ef569/.github/workflows/ci.yml#L49
