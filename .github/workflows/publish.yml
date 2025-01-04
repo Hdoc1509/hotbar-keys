@@ -41,7 +41,7 @@ jobs:
             "LOADER=$loader" \
             "LOADER_TITLE_CASE=${loader^}" \
             "JAR_FOLDER=$loader/build/libs" \
-            "JAR_FILE_NAME=hotbar-keys-$loader-$MC_BASE_VERSION-$mod_version" \
+            "JAR_FILE=hotbar-keys-$loader-$MC_BASE_VERSION-$mod_version.jar" \
             "MOD_VERSION=$mod_version" \
             "RELEASE_NAME=Hotbar Keys ($loader) $mod_version for Minecraft $MC_BASE_VERSION.x" \
             "TAG_NAME=$TAG_NAME"
@@ -69,7 +69,7 @@ jobs:
 
           github-tag: ${{ env.TAG_NAME }}
 
-          files: ${{ env.JAR_FOLDER }}/${{ env.JAR_FILE_NAME }}.jar
+          files: ${{ env.JAR_FOLDER }}/${{ env.JAR_FILE }}
 
           name: ${{ env.RELEASE_NAME }}
           version: ${{ env.MOD_VERSION }}
