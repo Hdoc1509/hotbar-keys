@@ -19,7 +19,7 @@ fi
 echo "{}" >"$TMP_RELEASE_FILE"
 
 for loader in "${loaders[@]}"; do
-  if ! git diff --quiet "$REPO_ROOT/$loader/CHANGELOG.md"; then
+  if ! git diff --quiet "$REPO_ROOT/$loader/CHANGELOG.md" &>/dev/null; then
     continue
   fi
 
