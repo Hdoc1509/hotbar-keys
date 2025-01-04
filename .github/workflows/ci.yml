@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: ["1.21"]
+  pull_request:
+    branches: ["1.21"]
+
+concurrency:
+  group: ${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  JAVA_MAJOR_VERSION: 21
+  JAVA_JDK_VERSION: "21.0.5"
+  MC_BASE_VERSION: "1.21"
+  MC_COMPATIBLE_VERSION: "[1.21,1.22)"
+
+jobs:
+  # based on https://github.com/vitejs/vite/blob/83355a6529092b3a576e2c24bbd8f9097f7ef569/.github/workflows/ci.yml#L49
+  changed-files:
+    runs-on: ubuntu-22.04
+    outputs:
+      should_skip: ${{ steps.changed-files.outputs.only_changed == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
+      - uses: tj-actions/changed-files@v45.0.6
+        id: changed-files
+        with:
+          files: |
+            .github/**
+            !.github/workflows/ci.yml
+            forge.disabled/**
+            neoforge.disabled/**
+            scripts/**
+            .editorconfig
+            .nvmrc
+            package.json
+            pnpm-lock.yaml
+            pnpm-workspace.yaml
+            **.md
+
+  build:
+    needs: changed-files
+    if: needs.changed-files.outputs.should_skip != 'true'
+    runs-on: ubuntu-22.04
+    steps:
+      # Setup
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-java@v4.6.0
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_JDK_VERSION }}
+
+      # Get commit short SHA
+      - run: echo "SHORT_SHA=$(cut --characters=1-8 <<< "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
+      - name: Set mod version as dev
+        run: |
+          field="version"
+          sed --in-place "s/^$field=.*/$field=dev-$SHORT_SHA/" gradle.properties
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4.5.0
+        with:
+          name: "Hotbar Keys dev-${{ env.SHORT_SHA }}"
+          path: |
+            fabric/build/libs/*.jar
+            forge/build/libs/*.jar
+            neoforge/build/libs/*.jar
