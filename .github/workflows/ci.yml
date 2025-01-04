@@ -68,5 +68,3 @@ jobs:
           name: "Hotbar Keys dev-${{ env.SHORT_SHA }}"
           path: |
             fabric/build/libs/*.jar
-            forge/build/libs/*.jar
-            neoforge/build/libs/*.jar
