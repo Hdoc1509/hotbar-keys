@@ -4,3 +4,4 @@ of `{{ previous_version }}` version, i.e.,
 `{{ previous_major }}.{{ previous_minor }}.x`.
 
 _NOTE: `x` is a placeholder for any number. Don't use it as a value._
+
