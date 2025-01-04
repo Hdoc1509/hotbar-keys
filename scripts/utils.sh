@@ -1,4 +1,4 @@
-breaking_changes_message_file=$REPO_ROOT/scripts/breaking-change-message.md
+breaking_changes_message_file=$REPO_ROOT/scripts/breaking-change-message.tmpl.md
 gradle_properties_file="$REPO_ROOT"/gradle.properties
 
 set_changelog_breaking_changes_message() {
