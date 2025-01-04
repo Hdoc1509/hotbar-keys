@@ -24,8 +24,8 @@ set_changelog_breaking_changes_message() {
   echo "[RELEASE]: Breaking changes detected!"
   echo "[RELEASE]: Generating breaking change message..."
 
+  sed --in-place "4r $breaking_changes_message_file" "$breaking_changes_file"
   sed --in-place \
-    --expression="4r $breaking_changes_message_file" \
     --expression="s/{{ compatible_semver }}/$compatible_semver/" \
     --expression="s/{{ previous_version }}/$previous_version/" \
     --expression="s/{{ previous_minor }}/$previous_minor/" \
