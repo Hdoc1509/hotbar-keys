@@ -52,7 +52,7 @@ pnpm changeset version
 
 for loader in "${loaders_with_breaking_changes[@]}"; do
   _previous_version=$(jq -r ".$loader.previousVersion" "$TMP_RELEASE_FILE")
-  set_breaking_changes_message "$loader" "patch" "$_previous_version"
+  set_changelog_breaking_changes_message "$loader" "patch" "$_previous_version"
 done
 
 for loader in "${loaders_to_release[@]}"; do
