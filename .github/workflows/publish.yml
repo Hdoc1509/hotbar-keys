@@ -29,20 +29,36 @@ jobs:
       - name: Allow Gradlew Wrapper to be executed
         run: chmod +x ./gradlew
 
-      # NOTE:
-      # tags have the format: {loader}-{mc-version}@{mod-version}
-      #   i.e. fabric-1.21.x@0.1.0, neoforge-1.19.x@0.1.0
+      # NOTE: tags have the format: {loader}-{mc-version}@{mod-version}
+      #   i.e. fabric-1.21.x@0.1.0, neoforge-1.21.x@0.2.0
       - name: Setup Shareable Environment Variables
         run: |
-          mod_version="$(cut --delimiter=@ --fields=2 <<< ${{ github.ref_name }})"
-          echo "MOD_VERSION=${mod_version}" >> "$GITHUB_ENV"
+          loader="$(cut --delimiter=- --fields=1 <<< "$TAG_NAME")"
+          mod_version="$(cut --delimiter=@ --fields=2 <<< "$TAG_NAME")"
+          changelog_body=$(./scripts/release-changelog-body.sh "$TAG_NAME" "$loader")
+          printf '%s\n' "$GITHUB_ENV" \
+            "CHANGELOG_BODY=$changelog_body" \
+            "LOADER=$loader" \
+            "LOADER_TITLE_CASE=${loader^}" \
+            "JAR_FOLDER=$loader/build/libs" \
+            "JAR_FILE_NAME=hotbar-keys-$loader-$MC_BASE_VERSION-$mod_version" \
+            "MOD_VERSION=$mod_version" \
+            "RELEASE_NAME=Hotbar Keys ($loader) $mod_version for Minecraft $MC_BASE_VERSION.x" \
+            "TAG_NAME=$TAG_NAME"
+        env:
+          TAG_NAME: ${{ github.ref_name }}
 
-      - name: Build Fabric
-        if: startsWith(github.event.ref, 'refs/tags/fabric-')
-        run: ./gradlew fabric:build
+      # NOTE: this allows to generate the correct version for .jar files
+      - name: Update general `version` in gradle.properties
+        run: |
+          field="version"
+          sed --in-place "s/^$field=.*/$field=$MOD_VERSION/" gradle.properties
 
-      - name: Publish Fabric
-        if: ${{ startsWith(github.event.ref, 'refs/tags/fabric-') && success() }}
+      - name: Build Project
+        run: ./gradlew "$LOADER:build"
+
+      - name: Publish ${{ env.LOADER_TITLE_CASE }}
+        if: ${{ success() }}
         uses: Kir-Antipov/mc-publish@v3.3.0
         with:
           curseforge-id: 1169947
@@ -51,16 +67,16 @@ jobs:
           modrinth-id: Lsq3tiTo
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-          github-tag: ${{ github.ref_name }}
+          github-tag: ${{ env.TAG_NAME }}
 
-          files: |
-            fabric/build/libs/hotbar-keys-fabric-${{ env.MC_BASE_VERSION }}-${{ env.MOD_VERSION }}.jar
+          files: ${{ env.JAR_FOLDER }}/${{ env.JAR_FILE_NAME }}.jar
 
-          name: Hotbar Keys (Fabric) ${{ env.MOD_VERSION }} for Minecraft ${{ env.MC_BASE_VERSION }}.x
+          name: ${{ env.RELEASE_NAME }}
+          version: ${{ env.MOD_VERSION }}
           version-type: release
-          changelog: |
-            Please refer to [CHANGELOG.md](https://github.com/Hdoc1509/hotbar-keys/blob/${{ github.ref_name }}/fabric/CHANGELOG.md) for details.
-          changelog-file: fabric/CHANGELOG.md
-          loaders: fabric
+          changelog: ${{ env.CHANGELOG_BODY }}
+          changelog-file: ${{ env.LOADER }}/CHANGELOG.md
+
+          loaders: ${{ env.LOADER }}
           game-versions: ${{ env.MC_COMPATIBLE_VERSION }}
           java: ${{ env.JAVA_MAJOR_VERSION }}
