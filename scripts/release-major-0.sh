@@ -1,6 +1,6 @@
 REPO_ROOT=$(git rev-parse --show-toplevel)
 TMP_RELEASE_FILE="$REPO_ROOT"/tmp/breaking-changes.json
-UNSTABLE_MESSAGE_REGEX='^\w+(\(.*\))?:!'
+BREAKING_CHANGE_MESSAGE_REGEX='^\w+(\(.*\))?:!'
 loaders=(fabric) # loaders that are developed in this branch
 loaders_to_release=()
 loaders_with_breaking_changes=()
@@ -26,7 +26,7 @@ for loader in "${loaders[@]}"; do
   loaders_to_release+=("$loader")
   _breaking_changes_count=$(
     git log "$(get_loader_last_tag "$loader")"..HEAD --oneline |
-      grep --count --extended-regexp "$UNSTABLE_MESSAGE_REGEX"
+      grep --count --extended-regexp "$BREAKING_CHANGE_MESSAGE_REGEX"
   )
 
   if [[ $_breaking_changes_count -eq 0 ]]; then
