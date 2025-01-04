@@ -42,7 +42,7 @@ for loader in "${loaders[@]}"; do
     rm -f -- "$_tmpfile"
 done
 
-echo -e "[RELEASE]: Major 0 release\!\n"
+echo -e "[RELEASE]: Major 0 release"'!'"\n"
 
 # genrate changelogs and update versions
 pnpm changeset version
