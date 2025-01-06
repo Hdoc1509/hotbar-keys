@@ -12,6 +12,7 @@ concurrency:
 
 env:
   JAVA_JDK_VERSION: "21.0.5"
+  MC_BASE_VERSION: "1.21"
 
 jobs:
   # based on https://github.com/vitejs/vite/blob/83355a6529092b3a576e2c24bbd8f9097f7ef569/.github/workflows/ci.yml#L49
@@ -65,6 +66,6 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4.5.0
         with:
-          name: "Hotbar Keys dev-${{ env.SHORT_SHA }}"
+          name: "Hotbar Keys ${{ env.MC_BASE_VERSION }}-dev-${{ env.SHORT_SHA }}"
           path: |
             fabric/build/libs/*.jar
