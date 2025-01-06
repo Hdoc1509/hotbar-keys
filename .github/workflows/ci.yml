@@ -68,4 +68,4 @@ jobs:
         with:
           name: "Hotbar Keys ${{ env.MC_BASE_VERSION }}-dev-${{ env.SHORT_SHA }}"
           path: |
-            fabric/build/libs/*.jar
+            fabric/build/libs/*-${{ env.SHORT_SHA }}.jar
