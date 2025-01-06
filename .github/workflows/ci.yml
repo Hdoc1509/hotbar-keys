@@ -51,6 +51,7 @@ jobs:
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_JDK_VERSION }}
+          cache: gradle
 
       # Get commit short SHA
       - run: echo "SHORT_SHA=$(cut --characters=1-8 <<< "$GITHUB_SHA")" >> "$GITHUB_ENV"

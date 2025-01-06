@@ -25,6 +25,7 @@ jobs:
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_JDK_VERSION }}
+          cache: gradle
 
       # NOTE: tags have the format: {loader}-{mc-version}@{mod-version}
       #   i.e. fabric-1.21.x@0.1.0, neoforge-1.21.x@0.2.0
