@@ -21,3 +21,12 @@ build
 # other
 eclipse
 run
+
+# node
+node_modules
+
+# env
+.env
+
+# temp
+/tmp
