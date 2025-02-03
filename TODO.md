@@ -21,4 +21,4 @@
 
 ## Forge
 
-- Add notes for future development
+- Update metadate in `mods.toml`
