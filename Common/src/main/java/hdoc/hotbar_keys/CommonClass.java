@@ -1,10 +1,22 @@
 package hdoc.hotbar_keys;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import hdoc.hotbar_keys.platform.Services;
+
+import net.minecraft.client.KeyMapping;
+
+import org.lwjgl.glfw.GLFW;
 
 public class CommonClass {
 
-    // NOTE: create usePrevItem KeyMapping
+    public static KeyMapping usePrevItem =
+            new KeyMapping(
+                    Constants.KEY_PREV_ITEM,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_V,
+                    Constants.KEY_CATEGORY_MOD);
+
     // NOTE: create useNextItem KeyMapping
     // NOTE: create onClientTick method
 
