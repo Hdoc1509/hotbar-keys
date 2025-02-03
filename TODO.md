@@ -2,10 +2,6 @@
 
 <!-- NOTE: take 1.21 branch as reference -->
 
-## Common
-
-- add `hotbar-keys.png` in `resources` folder
-
 ## Fabric
 
 - Update `fabric.mod.json`
