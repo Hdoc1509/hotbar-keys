@@ -1,6 +1,7 @@
-package com.example.examplemod.platform;
+package hdoc.hotbar_keys.platform;
 
-import com.example.examplemod.platform.services.IPlatformHelper;
+import hdoc.hotbar_keys.platform.services.IPlatformHelper;
+
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatformHelper implements IPlatformHelper {
