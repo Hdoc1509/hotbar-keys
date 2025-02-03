@@ -10,7 +10,6 @@
   - update `description` field
   - update `authors` field
   - update `contact` field
-  - update `license` field
   - update `icon` field
   - update `environment` field
   - update `entrypoints` field. only `client` entrypoint
