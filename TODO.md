@@ -21,4 +21,4 @@
 
 ## Forge
 
-- Update group
+- Add notes for future development
