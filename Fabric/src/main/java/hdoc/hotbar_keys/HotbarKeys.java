@@ -1,6 +1,7 @@
 package hdoc.hotbar_keys;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 
 public class HotbarKeys implements ClientModInitializer {
@@ -15,6 +16,8 @@ public class HotbarKeys implements ClientModInitializer {
         // Use Fabric to bootstrap the Common mod.
         KeyBindingHelper.registerKeyBinding(CommonClass.usePrevItem);
         KeyBindingHelper.registerKeyBinding(CommonClass.useNextItem);
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> CommonClass.onClientTick(client));
 
         CommonClass.init();
     }
