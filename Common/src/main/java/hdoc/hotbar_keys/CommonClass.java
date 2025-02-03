@@ -17,7 +17,13 @@ public class CommonClass {
                     GLFW.GLFW_KEY_V,
                     Constants.KEY_CATEGORY_MOD);
 
-    // NOTE: create useNextItem KeyMapping
+    public static KeyMapping useNextItem =
+            new KeyMapping(
+                    Constants.KEY_NEXT_ITEM,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_R,
+                    Constants.KEY_CATEGORY_MOD);
+
     // NOTE: create onClientTick method
 
     // This method serves as an initialization hook for the mod. The vanilla
