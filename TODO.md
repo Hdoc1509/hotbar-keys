@@ -4,7 +4,6 @@
 
 ## Common
 
-- Update `Constants.java`
 - Update `CommonClass.java`
 - Update `Services.java`
 - add `assets/hotbar-keys/lang/en_us.json` in `resources` folder
