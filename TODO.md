@@ -4,7 +4,6 @@
 
 ## Fabric
 
-- Remove `mixins`-related files
 - Update `HotbarKeys.java`
 
 ## Forge
