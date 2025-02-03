@@ -1,39 +1,28 @@
 {
     "schemaVersion": 1,
-    "id": "modid",
+    "id": "hotbar-keys",
     "version": "${fabric_mod_version}",
 
-    "name": "Example Mod",
-    "description": "This is an example description! Tell everyone what your mod is about!",
-    "authors": [
-      "Me!"
-    ],
+    "name": "Hotbar Keys",
+    "description": "Navigate the hotbar with your keyboard",
+    "authors": ["Héctor Ochoa (hdoc)"],
     "contact": {
-      "homepage": "https://fabricmc.net/",
-      "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://github.com/Hdoc1509/hotbar-keys/",
+        "sources": "https://github.com/Hdoc1509/hotbar-keys/"
     },
 
     "license": "GPL-3.0-only",
-    "icon": "assets/modid/icon.png",
+    "icon": "hotbar-keys.png",
 
-    "environment": "*",
+    "environment": "client",
     "entrypoints": {
-      "main": [
-        "com.example.examplemod.ExampleMod"
-      ]
+        "client": ["hdoc.hotbar_keys.HotbarKeys"]
     },
-    "mixins": [
-      "modid.mixins.json"
-    ],
 
     "depends": {
-      "fabricloader": ">=0.13",
-      "fabric": "*",
-      "minecraft": "1.18.x",
-      "java": ">=17"
-    },
-    "suggests": {
-      "another-mod": "*"
+        "fabricloader": ">=0.13",
+        "fabric": "*",
+        "minecraft": "1.18.x",
+        "java": ">=17"
     }
-  }
-
+}
