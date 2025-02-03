@@ -5,6 +5,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import hdoc.hotbar_keys.platform.Services;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -24,7 +26,27 @@ public class CommonClass {
                     GLFW.GLFW_KEY_R,
                     Constants.KEY_CATEGORY_MOD);
 
-    // NOTE: create onClientTick method
+    public static void onClientTick(Minecraft client) {
+        if (client.player == null || client.gameMode == null) return;
+
+        LocalPlayer player = client.player;
+
+        if (usePrevItem.consumeClick()) {
+            int currentSlot = player.getInventory().selected;
+            int previousSlot = (currentSlot - 1 + 9) % 9;
+
+            player.getInventory().selected = previousSlot;
+            return;
+        }
+
+        if (useNextItem.consumeClick()) {
+            int currentSlot = player.getInventory().selected;
+            int nextSlot = (currentSlot + 1) % 9;
+
+            player.getInventory().selected = nextSlot;
+            return;
+        }
+    }
 
     // This method serves as an initialization hook for the mod. The vanilla
     // game has no mechanism to load tooltip listeners so this must be
