@@ -9,4 +9,4 @@ Navigate the hotbar with your keyboard
 
 ## Compatibility
 
-- `Fabric`: `1.21.X`
+- `Fabric`: `1.18.x`
