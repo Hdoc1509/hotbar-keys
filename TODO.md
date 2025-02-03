@@ -4,8 +4,6 @@
 
 ## Common
 
-- Update `Services.java`
-- add `assets/hotbar-keys/lang/en_us.json` in `resources` folder
 - add `hotbar-keys.png` in `resources` folder
 
 ## Fabric
