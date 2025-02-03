@@ -1,4 +1,4 @@
-package com.example.examplemod.platform.services;
+package hdoc.hotbar_keys.platform.services;
 
 public interface IPlatformHelper {
 
